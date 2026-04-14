@@ -1,4 +1,4 @@
-package enums;
+package TicketManagement;
 
 public enum MealType {
     BEEF_AND_RICE,

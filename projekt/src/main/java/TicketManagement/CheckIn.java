@@ -1,13 +1,12 @@
-package model;
+package TicketManagement;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * TicketManagement::Check-in
  *
- * Agregácia: CheckIn 1 ---◇ 1 Ticket
+ * Agregacia: CheckIn 1 ---◇ 1 Ticket
  */
 public class CheckIn {
 
@@ -49,7 +48,7 @@ public class CheckIn {
 
     public void overUdaje() {
         if (date == null) {
-            throw new IllegalStateException("Dátum check-inu nesmie byť prázdny.");
+            throw new IllegalStateException("Datum check-inu nesmie byt prazdny.");
         }
     }
 

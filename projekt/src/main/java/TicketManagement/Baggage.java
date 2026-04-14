@@ -1,13 +1,12 @@
-package model;
+package TicketManagement;
 
-import enums.BaggageType;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * TicketManagement::Baggage
  *
- * Agregácia: Baggage 0..* ---◇ 0..1 Ticket
+ * Agregacia: Baggage 0..* ---◇ 0..1 Ticket
  */
 public class Baggage {
 
@@ -60,20 +59,28 @@ public class Baggage {
     }
 
     public void overUdaje() {
+        overovanie();
+    }
+
+    public void overovanie() {
         if (baggageId <= 0) {
-            throw new IllegalStateException("ID batožiny musí byť kladné.");
+            throw new IllegalStateException("ID batoziny musi byt kladne.");
         }
         if (type == null) {
-            throw new IllegalStateException("Typ batožiny nesmie byť prázdny.");
+            throw new IllegalStateException("Typ batoziny nesmie byt prazdny.");
         }
         if (weight <= 0) {
-            throw new IllegalStateException("Hmotnosť batožiny musí byť kladná.");
+            throw new IllegalStateException("Hmotnost batoziny musi byt kladna.");
         }
     }
 
-    public void ulozBatozinu() {
-        overUdaje();
+    public void ulozDoLetenky(Ticket t) {
+        overovanie();
+        t.ukladanie(this);
+    }
 
+    public void ulozBatozinu() {
+        overovanie();
         this.ticket.addBaggage(this);
     }
 

@@ -1,4 +1,4 @@
-package enums;
+package TicketManagement;
 
 public enum SeatType {
     ECONOMY,

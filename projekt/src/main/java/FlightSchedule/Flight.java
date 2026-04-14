@@ -1,5 +1,7 @@
-package model;
+package FlightSchedule;
 
+import PlaneManagement.Plane;
+import TicketManagement.Ticket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +9,11 @@ import java.util.List;
 /**
  * FlightSchedule::Flight
  *
- * Asociácie:
+ * Asociacie:
  *   - Ticket 1..* --- 1 Flight
  *   - Plane 1 --- 1 Flight
  *
- * Agregácia: Flight 1..* ---◇ 1 Schedule
+ * Agregacia: Flight 1..* ---◇ 1 Schedule
  */
 public class Flight {
 
@@ -22,6 +24,8 @@ public class Flight {
     private String origin;
     private Plane plane;
     private List<Ticket> tickets;
+
+    private static final List<Flight> flights = new ArrayList<>();
 
     public Flight() {
         this.tickets = new ArrayList<>();
@@ -98,12 +102,18 @@ public class Flight {
 
     // -------------------- Business Methods --------------------
 
-    public List<Flight> najdiLety(String origin, String destination, LocalDateTime date) {
+    public void ulozLet() {
+        flights.add(this);
+    }
+
+    public static List<Flight> najdiLety(String origin, String destination, LocalDateTime date) {
         List<Flight> result = new ArrayList<>();
-        if ((origin == null || this.origin.equals(origin)) &&
-            (destination == null || this.destination.equals(destination)) &&
-            (date == null || this.departureTime.toLocalDate().equals(date.toLocalDate()))) {
-            result.add(this);
+        for (Flight f : flights) {
+            if ((origin == null || f.origin.equals(origin)) &&
+                (destination == null || f.destination.equals(destination)) &&
+                (date == null || f.departureTime.toLocalDate().equals(date.toLocalDate()))) {
+                result.add(f);
+            }
         }
         return result;
     }

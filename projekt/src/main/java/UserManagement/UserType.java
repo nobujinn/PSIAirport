@@ -1,4 +1,4 @@
-package enums;
+package UserManagement;
 
 public enum UserType {
     CESTUJUCI,

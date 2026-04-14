@@ -1,4 +1,4 @@
-package model;
+package FlightSchedule;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * FlightSchedule::Schedule
  *
- * Agregácia: Flight 1..* ---◇ 1 Schedule
+ * Agregacia: Flight 1..* ---◇ 1 Schedule
  */
 public class Schedule {
 
@@ -55,7 +55,7 @@ public class Schedule {
 
     public void overUdaje() {
         if (date == null) {
-            throw new IllegalStateException("Dátum rozvrhu nesmie byť prázdny.");
+            throw new IllegalStateException("Datum rozvrhu nesmie byt prazdny.");
         }
     }
 
@@ -74,7 +74,7 @@ public class Schedule {
         overUdaje();
         for (Flight f : flights) {
             if (f.getPlane().getCapacity() <= 0) {
-                throw new IllegalStateException("Lietadlo id=" + f.getPlane().getPlaneId() + " má neplatnú kapacitu.");
+                throw new IllegalStateException("Lietadlo id=" + f.getPlane().getPlaneId() + " ma neplatnu kapacitu.");
             }
         }
     }

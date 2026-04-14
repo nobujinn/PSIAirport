@@ -1,13 +1,12 @@
-package model;
+package TicketManagement;
 
-import enums.MealType;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * TicketManagement::Meal
  *
- * Agregácia: Meal 0..* ---◇ 0..1 Ticket
+ * Agregacia: Meal 0..* ---◇ 0..1 Ticket
  */
 public class Meal {
 

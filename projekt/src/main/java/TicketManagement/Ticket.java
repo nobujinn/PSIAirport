@@ -1,8 +1,7 @@
-package model;
+package TicketManagement;
 
-import enums.BaggageType;
-import enums.MealType;
-
+import FlightSchedule.Flight;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,16 +116,24 @@ public class Ticket {
         return result;
     }
 
-    public void spracujPlatbu() {
+    public static List<Flight> vyhladajLetyPodlaFiltrov(String origin, String destination, LocalDateTime date) {
+        return Flight.najdiLety(origin, destination, date);
+    }
+
+    public void ulozStavPlatbyALetenku() {
         if (price <= 0) {
-            throw new IllegalStateException("Cena lístka musí byť kladná.");
+            throw new IllegalStateException("Cena listka musi byt kladna.");
         }
         tickets.add(this);
     }
 
+    public void spracujPlatbu() {
+        ulozStavPlatbyALetenku();
+    }
+
     public void ulozDoLetenky() {
         if (ticketId <= 0) {
-            throw new IllegalStateException("ID lístka musí byť platné.");
+            throw new IllegalStateException("ID listka musi byt platne.");
         }
         tickets.add(this);
     }
@@ -135,6 +142,14 @@ public class Ticket {
 
     public void addMeal(Meal meal) {
         this.meals.add(meal);
+    }
+
+    public void ukladanie(Baggage bag) {
+        this.baggage.add(bag);
+    }
+
+    public void ukladanie(Seat s) {
+        this.seat = s;
     }
 
     public void addBaggage(Baggage bag) {

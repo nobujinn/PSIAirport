@@ -1,13 +1,13 @@
-package model;
+package UserManagement;
 
-import enums.UserType;
+import TicketManagement.Ticket;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * UserManagement::User
  *
- * Asociácia: User 1 --- 0..* Ticket
+ * Asociacia: User 1 --- 0..* Ticket
  */
 public class User {
 
@@ -80,10 +80,10 @@ public class User {
 
     public void overUdaje() {
         if (name == null || name.isBlank()) {
-            throw new IllegalStateException("Meno používateľa nesmie byť prázdne.");
+            throw new IllegalStateException("Meno pouzivatela nesmie byt prazdne.");
         }
         if (email == null || email.isBlank()) {
-            throw new IllegalStateException("E-mail používateľa nesmie byť prázdny.");
+            throw new IllegalStateException("E-mail pouzivatela nesmie byt prazdny.");
         }
     }
 

@@ -1,4 +1,4 @@
-package model;
+package PlaneManagement;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -62,10 +62,10 @@ public class Parking {
 
     public boolean overDostupnost() {
         if (dateFrom == null || dateTo == null) {
-            throw new IllegalStateException("Dátumy parkovania nesmú byť prázdne.");
+            throw new IllegalStateException("Datumy parkovania nesmu byt prazdne.");
         }
         if (dateFrom.isAfter(dateTo)) {
-            throw new IllegalStateException("Dátum začiatku musí byť pred dátumom konca.");
+            throw new IllegalStateException("Datum zaciatku musi byt pred datumom konca.");
         }
         for (Parking p : register) {
             if (p.parkingId == this.parkingId

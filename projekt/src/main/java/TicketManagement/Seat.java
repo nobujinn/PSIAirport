@@ -1,11 +1,9 @@
-package model;
-
-import enums.SeatType;
+package TicketManagement;
 
 /**
  * TicketManagement::Seat
  *
- * Agregácia: Seat 1 ---◇ 1 Ticket
+ * Agregacia: Seat 1 ---◇ 1 Ticket
  */
 public class Seat {
 
@@ -53,15 +51,26 @@ public class Seat {
     // -------------------- Business Methods --------------------
 
     public void overDostupnost() {
+        skontrolujMiesto();
+    }
+
+    public void skontrolujMiesto() {
         if (!available) {
-            throw new IllegalStateException("Sedadlo id=" + seatId + " nie je dostupné.");
+            throw new IllegalStateException("Sedadlo id=" + seatId + " nie je dostupne.");
         }
     }
 
-    public void ulozRezervaciu() {
-        overDostupnost();
+    public void ulozRezervaciu(Ticket t) {
+        skontrolujMiesto();
+        t.ukladanie(this);
+        this.available = false;
+    }
 
+    /** Legacy no-arg overload kept for compatibility. */
+    public void ulozRezervaciu() {
+        skontrolujMiesto();
         this.ticket.setSeat(this);
+        this.available = false;
     }
 
     public float zistiCenu() {

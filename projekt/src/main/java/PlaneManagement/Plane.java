@@ -1,6 +1,4 @@
-package model;
-
-import enums.PlaneType;
+package PlaneManagement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,15 +61,17 @@ public class Plane {
 
     public void overUdaje() {
         if (capacity <= 0) {
-            throw new IllegalStateException("Kapacita lietadla musí byť kladná.");
+            throw new IllegalStateException("Kapacita lietadla musi byt kladna.");
         }
         if (type == null) {
-            throw new IllegalStateException("Typ lietadla nesmie byť prázdny.");
+            throw new IllegalStateException("Typ lietadla nesmie byt prazdny.");
         }
     }
 
-    public void zadajTechnickeUdaje() {
+    public void zadajTechnickeUdaje(int capacity, PlaneType type) {
         overUdaje();
+        setCapacity(capacity);
+        setType(type);
         ulozLietadlo();
     }
 

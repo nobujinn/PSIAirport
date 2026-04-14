@@ -1,4 +1,4 @@
-package enums;
+package PlaneManagement;
 
 public enum PlaneType {
     PRIVATE,
