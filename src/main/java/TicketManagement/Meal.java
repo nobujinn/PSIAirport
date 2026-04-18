@@ -76,6 +76,10 @@ public class Meal {
         return result;
     }
 
+    public void ulozJedlo() {
+        register.add(this);
+    }
+
     public void ulozAlergie(List<String> alergie) {
         this.alergie = alergie;
     }

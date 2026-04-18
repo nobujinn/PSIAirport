@@ -69,9 +69,9 @@ public class Plane {
     }
 
     public void zadajTechnickeUdaje(int capacity, PlaneType type) {
-        overUdaje();
         setCapacity(capacity);
         setType(type);
+        overUdaje();
         ulozLietadlo();
     }
 
