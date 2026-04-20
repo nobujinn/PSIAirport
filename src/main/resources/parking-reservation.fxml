@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="760.0" style="-fx-background-color: #7ec1ea;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ParkingReservationController">
+    <children>
+        <Pane prefHeight="34.0" prefWidth="760.0" style="-fx-background-color: #001fd1;">
+            <children>
+                <Label layoutX="8.0" layoutY="7.0" text="Rezervacia parkovacieho miesta pre lietadlo" textFill="WHITE" />
+            </children>
+        </Pane>
+
+        <VBox layoutX="62.0" layoutY="66.0" spacing="12.0">
+            <children>
+                <Label text="Vyberte si lietadlo" />
+                <ComboBox fx:id="planeComboBox" prefWidth="250.0" />
+
+                <VBox spacing="10.0" style="-fx-border-color: #6b6b6b; -fx-border-radius: 8; -fx-padding: 12; -fx-background-color: transparent;">
+                    <children>
+                        <Label text="Datum parkovania" />
+
+                        <Label text="Zaciatok" />
+                        <DatePicker fx:id="dateFromPicker" prefWidth="210.0" />
+
+                        <Label text="Koniec" />
+                        <DatePicker fx:id="dateToPicker" prefWidth="210.0" />
+
+                        <Label text="Parkovacie miesto" />
+                        <TextField fx:id="parkingPlaceField" promptText="Zadajte miesto" prefWidth="210.0" />
+                    </children>
+                </VBox>
+
+                <Label fx:id="feedbackLabel" style="-fx-text-fill: #b00020;" wrapText="true" prefWidth="280.0" />
+            </children>
+        </VBox>
+
+        <Button layoutX="560.0" layoutY="432.0" mnemonicParsing="false" onAction="#onConfirm" prefWidth="140.0" text="Potvrdit" />
+    </children>
+</AnchorPane>

@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        // UC:01 - Registracia lietadla (contains ref: UC:03)
+        // UC:01.1 - Registracia lietadla (contains ref: UC:03)
         uc01_registraciaLietadla();
 
         // UC:02 - Nakup letenky (contains ref: UC:05, opt: UC:06, UC:04, UC:07)
@@ -21,7 +21,7 @@ public class Main {
         // UC:08 - Prehlad letoveho poriadku
         uc08_prehadLetovehoPoriadku();
 
-        // UC:09 - Vymazanie lietadla
+        // UC:01.2 - Vymazanie lietadla
         uc09_vymazanieLietadla();
     }
 
@@ -74,6 +74,7 @@ public class Main {
 
         // ref: UC:03 Rezervacia parkovacieho miesta pre lietadlo
         uc03_rezervaciaParkovaciehoMiesta();
+
     }
 
     // UC:02 - Nakup letenky
@@ -133,54 +134,25 @@ public class Main {
 
     // UC:03 - Rezervacia parkovacieho miesta pre lietadlo
     static void uc03_rezervaciaParkovaciehoMiesta() {
-        // vyber lietadlo() — user selects their plane
-        // GUI self: zobraz formular rezervacie() — reservation form shown to user
-        System.out.println("[UC03] Zobrazujem formular rezervacie parkovacieho miesta.");
+        System.out.println("[UC03] Otvaram FXML formular rezervacie parkovacieho miesta.");
 
-        // Use the plane registered in UC01 (simulated with same ID/type)
-        Plane plane = new Plane(2, PlaneType.PRIVATE, 8);
+        ParkingReservationResult result = ParkingReservationDialog.showAndWait();
 
-        // Pre-seed one conflicting reservation so the loop fires at least once
-        new Parking(1, LocalDateTime.of(2026, 5, 10, 10, 0),
-                LocalDateTime.of(2026, 5, 10, 14, 0), plane).ulozRezervaciu();
-
-        // Candidate time windows — first overlaps (unavailable), second is free
-        LocalDateTime[][] timeSlots = {
-                { LocalDateTime.of(2026, 5, 10, 12, 0), LocalDateTime.of(2026, 5, 10, 16, 0) },  // conflicts
-                { LocalDateTime.of(2026, 5, 10, 15, 0), LocalDateTime.of(2026, 5, 10, 19, 0) }   // free
-        };
-
-        // --- LOOP: Pokial miesto nie je k dispozicii ---
-        Parking reservation = null;
-        int attempt = 0;
-        boolean available = false;
-        while (!available) {
-            // zadaj datum a cas parkovania() — user submits date/time
-            System.out.println("[UC03] Zadany cas: od=" + timeSlots[attempt][0]
-                    + " do=" + timeSlots[attempt][1]);
-
-            // over dostupnost() — GUI -> Parking.overDostupnost() -> Parking self-validates
-            reservation = new Parking(1, timeSlots[attempt][0], timeSlots[attempt][1], plane);
-            available = reservation.overDostupnost();
-
-            if (!available) {
-                // GUI self: zobraz alternativne miesta() — suggest other slots to user
-                System.out.println("[UC03] Miesto nie je dostupne. Zobrazujem alternativne miesta.");
-                attempt++;
-            }
+        if (result == null) {
+            System.out.println("[UC03] Rezervacia bola zrusena pouzivatelom.");
+            return;
         }
-        // --- END LOOP ---
 
-        // potvrď rezervaciu() — user confirms the available slot
-        System.out.println("[UC03] Cestujuci potvrdil rezervaciu pre cas: od="
-                + timeSlots[attempt][0] + " do=" + timeSlots[attempt][1]);
+        System.out.println("[UC03] Vstupy z formulara:");
+        System.out.println("[UC03]  - lietadlo: " + result.plane());
+        System.out.println("[UC03]  - datum od: " + result.dateFrom());
+        System.out.println("[UC03]  - datum do: " + result.dateTo());
+        System.out.println("[UC03]  - parkovacie miesto: " + result.parkingId());
 
-        // uloz rezervaciu() — GUI -> Parking.ulozRezervaciu()
-        //   -> Parking -> Plane.ulozRezervaciu() -> Plane self: ulozRezervaciu()
-        reservation.ulozRezervaciu();
-
-        // GUI self: zobraz potvrdenie rezervacie()
-        System.out.println("[UC03] Potvrdenie: rezervacia parkovacieho miesta ulozena: " + reservation);
+        System.out.println("[UC03] Potvrdenie: rezervacia ulozena. Lietadlo=" + result.plane()
+            + ", miesto=" + result.parkingId()
+            + ", od=" + result.dateFrom()
+            + ", do=" + result.dateTo());
     }
 
     // UC:04 - Registracia specialnej batoziny

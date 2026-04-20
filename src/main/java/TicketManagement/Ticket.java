@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import StateEnum.TicketState;
+
 
 public class Ticket {
 
@@ -14,6 +16,7 @@ public class Ticket {
     private double price;
     private Seat seat;
     private int ticketId;
+    private TicketState state;
 
 
 
@@ -29,6 +32,7 @@ public class Ticket {
         this.price = price;
         this.baggage = new ArrayList<>();
         this.meals = new ArrayList<>();
+        this.state = TicketState.created;
     }
 
     // -------------------- Getters & Setters --------------------
@@ -124,6 +128,7 @@ public class Ticket {
         if (price <= 0) {
             throw new IllegalStateException("Cena listka musi byt kladna.");
         }
+        this.state = TicketState.paid;
         tickets.add(this);
     }
 
@@ -135,6 +140,7 @@ public class Ticket {
         if (ticketId <= 0) {
             throw new IllegalStateException("ID listka musi byt platne.");
         }
+        this.state = TicketState.created;
         tickets.add(this);
     }
 
@@ -167,6 +173,7 @@ public class Ticket {
                 ", checkin=" + checkin +
                 ", meals=" + meals.size() +
                 ", baggage=" + baggage.size() +
+                ", state=" + state +
                 '}';
     }
 }

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import StateEnum.ParkState;
+
 
 public class Parking {
 
@@ -11,6 +13,7 @@ public class Parking {
     private LocalDateTime dateTo;
     private int parkingId;
     private Plane plane;
+    private ParkState state;
 
     private static final List<Parking> register = new ArrayList<>();
 
@@ -22,6 +25,7 @@ public class Parking {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.plane = plane;
+        this.state = ParkState.available;
     }
 
     // -------------------- Getters & Setters --------------------
@@ -81,6 +85,7 @@ public class Parking {
         boolean is_available = overDostupnost();
 
         if (is_available) {
+            this.state = ParkState.reserved;
             register.add(this);
             this.plane.ulozRezervaciu();
         }
@@ -95,6 +100,7 @@ public class Parking {
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
                 ", plane=" + plane +
+                ", state=" + state +
                 '}';
     }
 }

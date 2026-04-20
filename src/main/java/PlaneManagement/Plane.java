@@ -2,11 +2,14 @@ package PlaneManagement;
 import java.util.ArrayList;
 import java.util.List;
 
+import StateEnum.PlaneState;
+
 public class Plane {
 
     private int capacity;
     private int planeId;
     private PlaneType type;
+    private PlaneState state;
 
     private static final List<Plane> register = new ArrayList<>();
 
@@ -51,11 +54,17 @@ public class Plane {
         return register.get(index);
     }
 
+    public static List<Plane> getRegistrovaneLietadla() {
+        return new ArrayList<>(register);
+    }
+
     public void odstranLietadlo() {
+        this.state = PlaneState.deleted;
         register.remove(this);
     }
 
     public void ulozLietadlo() {
+        this.state = PlaneState.registered;
         register.add(this);
     }
 
@@ -77,6 +86,7 @@ public class Plane {
 
     public void ulozRezervaciu() {
         if (!register.contains(this)) {
+            this.state = PlaneState.parked;
             register.add(this);
         }
     }
@@ -89,6 +99,7 @@ public class Plane {
                 "planeId=" + planeId +
                 ", type=" + type +
                 ", capacity=" + capacity +
+                ", state=" + state +
                 '}';
     }
 }

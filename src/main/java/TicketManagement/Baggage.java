@@ -1,7 +1,8 @@
 package TicketManagement;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import StateEnum.BaggageState;
 
 /**
  * TicketManagement::Baggage
@@ -14,6 +15,7 @@ public class Baggage {
     private BaggageType type;
     private double weight;
     private Ticket ticket;
+    private BaggageState state;
 
     public Baggage() {
     }
@@ -81,6 +83,7 @@ public class Baggage {
 
     public void ulozBatozinu() {
         overovanie();
+        this.state = BaggageState.registered;
         this.ticket.addBaggage(this);
     }
 
@@ -92,6 +95,7 @@ public class Baggage {
                 "baggageId=" + baggageId +
                 ", type=" + type +
                 ", weight=" + weight +
+                ", state=" + state +
                 '}';
     }
 }
